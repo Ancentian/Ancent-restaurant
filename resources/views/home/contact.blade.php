@@ -45,8 +45,8 @@
                       </div>
                     </div>
                   </div>
-                  <form id="contactForm" action="{{route('')}}" method="POST" name="contactForm" class="contactForm">
-                    @{{ csrf_field() }}
+                  <form id="contactForm" action="{{route('storeContact')}}" method="POST" name="contactForm" class="contactForm">
+                    @csrf
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
@@ -56,6 +56,11 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="number" class="form-control" name="phonenumber" id="phonenumber" placeholder="Phone Number">
                         </div>
                       </div>
                       <div class="col-md-12">
