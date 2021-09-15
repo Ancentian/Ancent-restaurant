@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\c;
+use App\Models\Contact;
+use App\Http\Requests\ContactValidation;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,7 +48,12 @@ class HomeController extends Controller
      */
     public function storeContact(ContactValidation $request)
     {
-        //
+        $input = $request->all();
+
+        Contact::create($input);
+
+        return redirect(route('contactUs'));
+
     }
 
     /**
