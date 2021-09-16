@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\ContactValidation;
 use Illuminate\Http\Request;
+// start mailable
+use Mail;
+use App\Mail\ContactMail;
+//end Mailable
 
 class HomeController extends Controller
 {
@@ -49,11 +53,14 @@ class HomeController extends Controller
     public function storeContact(ContactValidation $request)
     {
         $input = $request->all();
-
         Contact::create($input);
 
-        return redirect(route('contactUs'));
+        // mailable
+        Mail::to('marionmbithi@gmail.com')->send(new ContactMail($input));
+        //End Mailable
 
+        $request->session()->flash('Message', 'Your Message has been Successfully Received');
+        return redirect(route('contactUs'));
     }
 
     /**

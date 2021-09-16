@@ -8,6 +8,31 @@
         <div class="col-md-9 pt-5 text-center">
           <p class="breadcrumbs"><span class="me-2"><a href="index-2.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Contact <i class="fa fa-chevron-right"></i></span></p>
           <h1 class="mb-0 bread">Contact us</h1>
+
+          {{-- Allert Message --}}
+          @if($message = Session::get('success'))
+          <div class="alert alert-success" role="alert">
+            {{ $message }}
+          </div>
+          @elseif(session()->has('Message'))
+          <div class="alert alert-success" role="alert">
+            {{ session()->get('Message') }}
+          </div>
+          @endif
+          {{-- End Alert Message --}}
+
+          {{-- Error Message --}}
+          @if(count($errors) > 0)
+          <div class="alert alert-danger" role="alert">
+            <strong>Whoops!</strong> Kindly check Your Inputs
+              <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li> 
+                @endforeach  
+              </ul>
+          </div>
+          @endif
+          {{-- End Error Message --}}
         </div>
       </div>
     </div>
@@ -50,30 +75,34 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                          <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder="Name">
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                          <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="email" placeholder="Email">
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="number" class="form-control" name="phonenumber" id="phonenumber" placeholder="Phone Number">
+                          <input type="number" id="phonenumber" class="form-control @error('phonenumber') is-danger @enderror" name="phonenumber" value="{{ old('phonenumber') }}" id="phonenumber" placeholder="Phone Number">
+                          <p class="help is-danger" style="color: red;">
+                            @error('phonenumber')
+                              {{ $errors->first('phonenumber') }}</p>
+                            @enderror
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                          <input type="text" class="form-control" name="subject" value="{{old('subject')}}" id="subject" placeholder="Subject">
                         </div>
                       </div>
                       <div class="col-md-12">
                        <div class="form-group">
-                        <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Create a message here"></textarea>
+                        <textarea name="message" class="form-control" id="message" value="{{ old('message') }}" cols="30" rows="2" placeholder="Create a message here"></textarea>
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-2">
                       <div class="form-group">
                         <input type="submit" value="Send Message" class="btn btn-primary">
                         <div class="submitting"></div>
