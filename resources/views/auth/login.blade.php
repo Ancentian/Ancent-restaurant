@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    {{-- <div class="alert alert-danger">
+        <strong>{{ session()->get('message') }}</strong>
+    </div> --}}
+    @if (session()->has('message'))
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">X</button>
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
