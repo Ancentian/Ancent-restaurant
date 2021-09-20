@@ -138,6 +138,15 @@
 							gtag('js', new Date());
 
 							gtag('config', 'UA-23581568-13');
+
+							//Removes Success Message Automatically 
+							$("document").ready(function()
+							{
+								setTimeout(function(){
+									$("div.alert").remove();
+								},3000)
+							})
+							//End
 						</script>
 
 	

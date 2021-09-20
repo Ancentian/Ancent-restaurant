@@ -9,6 +9,11 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+//Defines Redirection Path after Registration to Login
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+//End of Path Redirection
+
 class RegisterController extends Controller
 {
     /*
@@ -29,7 +34,15 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    public function register(Request $request)
+    {
+    $this->validator($request->all())->validate();
+
+    event(new Registered($user = $this->create($request->all())));
+
+    return redirect($this->redirectPath())->with('message', 'Login Using Your Credentials');
+    }
 
     /**
      * Create a new controller instance.
