@@ -35,6 +35,10 @@ Route::get('/home/roomSingle', 'RoomController@roomSingle')->name('roomSingle');
 Route::get('/home/restoBar', 'HomeController@restoBar')->name('restoBar');
 
 
+//ADMIN
+Route::get('/admin/index', 'AdminController@index')->name('adminIndex');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
